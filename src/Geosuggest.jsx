@@ -257,7 +257,8 @@ class Geosuggest extends React.Component {
           label: this.props.getSuggestLabel(suggest),
           placeId: suggest.place_id,
           isFixture: false,
-          matchedSubstrings: suggest.matched_substrings[0]
+          matchedSubstrings: suggest.matched_substrings[0],
+          terms: suggest.terms
         });
       }
     });
@@ -355,11 +356,17 @@ class Geosuggest extends React.Component {
       };
     }
 
+    let userInput = suggest.description;
+
+    if (suggest.terms && suggest.terms[0] && suggest.terms[0].value) {
+      userInput = suggest.terms[0].value;
+    } else if (typeof suggest.label !== 'object') {
+      userInput = suggest.label;
+    }
+
     this.setState({
       isSuggestsHidden: true,
-      userInput: typeof suggest.label !== 'object' ?
-        suggest.label :
-        suggest.description
+      userInput: userInput
     });
 
     if (suggest.location) {
