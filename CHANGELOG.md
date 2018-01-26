@@ -1,3 +1,6 @@
+## 2.8.0 (2018-01-25)
+* **Better displayed text:** Parse for place name
+
 ## 2.7.0 (2017-12-11)
 
 
